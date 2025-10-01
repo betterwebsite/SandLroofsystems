@@ -1,40 +1,37 @@
-//
-//    The Dark Mode System
-//
+function togglePlayButton() {
+        // Select all elements with the .cs-picture class
+        const picture = document.querySelector('#hero-2042 .cs-video-wrapper');
+        const playButton = document.querySelector('#hero-2042 .cs-play');
 
-// helper functions to toggle dark mode
-function enableDarkMode() {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("theme", "dark");
-}
-function disableDarkMode() {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("theme", "light");
-}
+        function togglePlayButton() {
+            playButton.classList.toggle('cs-hide');
+        }
 
-// determines a new users dark mode preferences
-function detectColorScheme() {
-    // default to the light theme
-    let theme = "light";
-
-    // check localStorage for a saved 'theme' variable. if it's there, the user has visited before, so apply the necessary theme choices
-    if (localStorage.getItem("theme")) {
-        theme = localStorage.getItem("theme");
-    }
-    // if it's not there, check to see if the user has applied dark mode preferences themselves in the browser
-    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        theme = "dark";
+        picture.addEventListener('click', togglePlayButton);
+        playButton.addEventListener('click', togglePlayButton);
     }
 
-    // if there is no preference set, the default of light will be used. apply accordingly
-    theme === "dark" ? enableDarkMode() : disableDarkMode();
-}
+    // Call the function to activate the event listeners
+    togglePlayButton();
 
-// run on page load
-detectColorScheme();
+    function toggleVideoPlayback() {
+        // Select the video element
+        const video = document.querySelector('#hero-2042 video');
+        const playButton = document.querySelector('#hero-2042 .cs-play');
 
-// add event listener to the dark mode button toggle
-document.getElementById("dark-mode-toggle").addEventListener("click", () => {
-    // on click, check localStorage for the dark mode value, use to apply the opposite of what's saved
-    localStorage.getItem("theme") === "light" ? enableDarkMode() : disableDarkMode();
-});
+        function togglePlay() {
+            // Check if the video is paused
+            if (video.paused) {
+                video.play(); // Play the video if it is paused
+            } else {
+                video.pause(); // Pause the video if it is playing
+            }
+        }
+
+        video.addEventListener("click", togglePlay);
+        playButton.addEventListener("click", togglePlay);
+    }
+
+    // Call the function to activate the event listener
+    toggleVideoPlayback();
+                                

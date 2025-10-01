@@ -1,14 +1,14 @@
 module.exports = {
-    name: "Code Stitch Web Designs",
-    email: "help@codestitch.app",
-    phoneForTel: "555-779-4407",
-    phoneFormatted: "(555) 779-4407",
+    name: "SandLroofsystems",
+    email: "sandlroofing47345@gmail.com",
+    phoneForTel: "765-238-8284",
+    phoneFormatted: "(765) 238-8284",
     address: {
-        lineOne: "First Address Line",
+        lineOne: "3225 Sowers Rd",
         lineTwo: "Second Address Line",
-        city: "Denver",
-        state: "CO",
-        zip: "80206",
+        city: "Greens Fork",
+        state: "IN",
+        zip: "47345",
         country: "US",
         mapLink: "https://maps.app.goo.gl/TEdS5KoLC9ZcULuQ6",
     },
@@ -17,7 +17,7 @@ module.exports = {
         instagram: "https://www.instagram.com/",
     },
     //! Make sure you include the file protocol (e.g. https://) and that NO TRAILING SLASH is included
-    domain: "https://www.example.com",
+    domain: "https://www.SandLroofsystems.com",
     // Passing the isProduction variable for use in HTML templates
     isProduction: process.env.ELEVENTY_ENV === "PROD",
 };
