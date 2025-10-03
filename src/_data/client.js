@@ -5,12 +5,11 @@ module.exports = {
     phoneFormatted: "(765) 238-8284",
     address: {
         lineOne: "3225 Sowers Rd",
-        lineTwo: "Second Address Line",
         city: "Greens Fork",
         state: "IN",
         zip: "47345",
         country: "US",
-        mapLink: "https://maps.app.goo.gl/TEdS5KoLC9ZcULuQ6",
+        mapLink: "https://maps.app.goo.gl/hqCwtxN3EdWrsskk9",
     },
     socials: {
         facebook: "https://www.facebook.com/",

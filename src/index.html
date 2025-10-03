@@ -17,6 +17,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
         <noscript>
             <link rel="stylesheet" href="/assets/css/local.css">
         </noscript>
+        <link rel="preload" as="image" href="/assets/images/Homepage/hero1.jpg" imagesrcset="/assets/images/Homepage/hero1.jpg" fetchpriority="high">
 
     {% else %}
         <link rel="stylesheet" href="/assets/css/local.css"/>
@@ -34,34 +35,159 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
 <!--                    Hero                      -->
 <!-- ============================================ -->
 
+<!-- Preload the poster to win LCP -->
+
+
 <section id="hero-2275">
-    <div class="cs-container">
-        <div class="cs-content">
-            <h1 class="cs-title">Commercial Roofing Solutions That Stand Tall</h1>
-            <p class="cs-text">
-                Delivering durable, large-scale roofing systems for warehouses, offices, and industrial facilities across Indiana.
-            </p>
-            <a href="" class="cs-button-solid">
-                CALL NOW
-                <img class="cs-button-arrow" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/white-arrow-up.svg" decoding="async" alt="arrow" width="20" height="20" aria-hidden="true">
-            </a>
-        </div>
+  <div class="cs-container">
+    <div class="cs-content">
+      <h1 class="cs-title">Roofing Solutions That Stand Tall</h1>
+      <p class="cs-text">
+        Delivering durable, large-scale roofing systems for warehouses, offices, and industrial facilities across Indiana.
+      </p>
+      <a href="tel:765-238-8284" class="cs-button-solid">
+        CALL NOW
+        <img class="cs-button-arrow" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/white-arrow-up.svg" decoding="async" alt="arrow" width="20" height="20" aria-hidden="true">
+      </a>
     </div>
-    <div class="cs-image-group">
-        <!--Left Image-->
-        <picture class="cs-background cs-background1">
-            <source media="(max-width: 600px)" srcset="/assets/images/Homepage/hero1.jpg">
-            <source media="(min-width: 601px)" srcset="/assets/images/Homepage/hero1.jpg">
-            <img aria-hidden="true" decoding="async" src="/assets/images/Homepage/hero1.jpg" alt="construction site" width="1290" height="684">
-        </picture>
-        <!--Right Image-->
-        <picture class="cs-background cs-background2">
-            <source media="(max-width: 600px)" srcset="/assets/images/Homepage/hero2.jpg">
-            <source media="(min-width: 601px)" srcset="/assets/images/Homepage/hero2.jpg">
-            <img aria-hidden="true" decoding="async" src="/assets/images/Homepage/hero2.jpg" alt="construction site" width="630" height="684">
-        </picture>
+  </div>
+
+  <div class="cs-image-group">
+    <!-- Left “background” becomes a video container -->
+    <div class="cs-background cs-background1 cs-video-wrap" aria-hidden="true">
+      <!-- Keep the poster image as the LCP element -->
+      <img
+        class="cs-video-poster"
+        src="/assets/images/Homepage/hero1.jpg"
+        width="1290" height="684"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      >
+
+      <!-- The video is injected with sources AFTER first paint -->
+      <video
+  class="cs-hero-video"
+  playsinline
+  muted
+  loop
+  autoplay
+  preload="none"
+  poster="/assets/images/Homepage/hero1-poster.webp"
+  aria-hidden="true"
+  controls="false"                
+  controlslist="nodownload noplaybackrate nofullscreen"
+  disablepictureinpicture
+></video>
+
+
+      <noscript>
+        <!-- Fallback if JS is disabled -->
+        <img src="/assets/images/Homepage/hero1.jpg" width="1290" height="684" alt="" loading="eager">
+      </noscript>
     </div>
+
+    <!-- Right image stays as-is -->
+    <picture class="cs-background cs-background2">
+      <source media="(max-width: 600px)" srcset="/assets/images/Homepage/hero2.jpg">
+      <source media="(min-width: 601px)" srcset="/assets/images/Homepage/hero2.jpg">
+      <img aria-hidden="true" decoding="async" src="/assets/images/Homepage/hero2.jpg" alt="construction site" width="630" height="684" loading="lazy">
+    </picture>
+  </div>
 </section>
+<style>
+    /* Make the media fully decorative & non-interactive */
+.cs-hero-video,
+.cs-video-poster {
+  pointer-events: none;          /* clicks, taps, hovers do nothing */
+  user-select: none;
+}
+
+/* Some browsers show native overlays — hide them */
+.cs-hero-video::-webkit-media-controls { display: none !important; }
+.cs-hero-video::-webkit-media-controls-enclosure { display: none !important; }
+.cs-hero-video::-moz-media-controls { display: none !important; }
+
+/* Prevent cursor hints and transitions on the wrapper too */
+.cs-video-wrap,
+.cs-video-wrap * {
+  cursor: default !important;
+  transition: none !important;
+}
+
+    .cs-video-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-video-poster,
+.cs-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hide video if user prefers reduced motion; show poster only */
+@media (prefers-reduced-motion: reduce) {
+  .cs-hero-video { display: none; }
+  .cs-video-poster { display: block; }
+}
+
+</style>
+<script defer>
+(function () {
+  // Respect reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const video = document.querySelector('.cs-hero-video');
+  if (!video) return;
+
+  // Use requestIdleCallback if available; otherwise defer to load
+  const start = function () {
+    if (video.dataset.loaded) return;
+
+    // Swap in sources only now (so they weren’t render-blocking)
+    const srcWebm = 'https://betterwebsite.sfo3.cdn.digitaloceanspaces.com/SandLroofsystems/sandLroofingHero.webm';
+    const srcMp4  = 'https://betterwebsite.sfo3.cdn.digitaloceanspaces.com/SandLroofsystems/sandLroofingHero.mp4';
+    // If you only have .mov right now, transcode to .mp4/.webm for much faster decode and broader support.
+
+    const s1 = document.createElement('source');
+    s1.src = srcWebm;
+    s1.type = 'video/webm';
+
+    const s2 = document.createElement('source');
+    s2.src = srcMp4;
+    s2.type = 'video/mp4';
+
+    video.appendChild(s1);
+    video.appendChild(s2);
+    video.dataset.loaded = '1';
+
+    // Don’t block—kick off load and attempt play
+    const tryPlay = () => video.play().catch(() => {
+      // If autoplay is blocked, at least display the first frame quickly
+      video.muted = true;
+      video.play().catch(()=>{ /* leave poster visible */ });
+    });
+
+    // Give layout a tick so poster paints first
+    requestAnimationFrame(() => {
+      // Start fetching without forcing high priority
+      video.load();
+      // Attempt play soon after
+      setTimeout(tryPlay, 50);
+    });
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(start, { timeout: 1000 });
+  } else {
+    window.addEventListener('load', start);
+  }
+})();
+</script>
 
 <!-- ============================================ -->
 <!--                  Services                    -->
@@ -72,7 +198,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
         <ul class="cs-card-group">
             <li class="cs-item">
                 <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction1.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
+                    <img class="cs-icon" src="/assets/svgs/medal.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
                     <h3 class="cs-h3">Best Roof Renovation </h3>
                     <p class="cs-item-text">
                         Upgrade your roof with strength, style, and reliability!
@@ -81,7 +207,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             </li>
             <li class="cs-item">
                 <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction2.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
+                    <img class="cs-icon" src="/assets/svgs/checked.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
                     <h3 class="cs-h3">Quality Always Matters </h3>
                     <p class="cs-item-text">
                         Quality renovations provide lasting beauty and functionality.
@@ -90,7 +216,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             </li>
             <li class="cs-item">
                 <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction3.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
+                    <img class="cs-icon" src="/assets/svgs/handshake.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
                     <h3 class="cs-h3">Effective Teamwork </h3>
                     <p class="cs-item-text">
                         Collaboration drives success through shared goals and communication.
@@ -106,20 +232,20 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             </li>
             <li class="cs-item">
                 <a href="" class="cs-link">
-                    <img class="cs-icon" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/construction4.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
+                    <img class="cs-icon" src="/assets/svgs/rating_thick.svg" decoding="async" alt="icon" width="40" height="40" aria-hidden="true">
                     <span class="cs-number">200+</span>
                     <h3 class="cs-h3">Happy Customers</h3>
                     <p class="cs-item-text">
-                        With more than 7 years of expertise we served our clients.
+                        With more than 15 years of expertise we served our clients.
                     </p>
                     <span class="cs-fake-link">
                         Let's Work Together
-                        <img class="cs-arrow" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/orange-arrow-up.svg" decoding="async" alt="arrow" width="20" height="20" aria-hidden="true">
+                        <img class="cs-arrow" src="/assets/svgs/orange-arrow-up.svg" decoding="async" alt="arrow" width="20" height="20" aria-hidden="true">
                     </span>
                     <picture class="cs-background">
-                        <source media="(max-width: 600px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg">
-                        <source media="(min-width: 601px)" srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg">
-                        <img aria-hidden="true" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/MISC/construction3.jpg" alt="construction site" width="630" height="684">
+                        <source media="(max-width: 600px)" srcset="/assets/images/Homepage/background.jpg">
+                        <source media="(min-width: 601px)" srcset="/assets/images/Homepage/background.jpg">
+                        <img aria-hidden="true" decoding="async" src="/assets/images/Homepage/background.jpg" alt="construction site" width="630" height="684">
                     </picture>
                 </a>
             </li>
@@ -157,8 +283,8 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
                 <div class="cs-button-box">
                     <a class="cs-link" href="tel:+1235568824">
                         <picture class="cs-icon-wrapper">
-                            <img class="cs-icon" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/red-phone.svg" alt="icon"
-                                width="24" height="24">
+                            <img class="cs-icon" loading="lazy" decoding="async" src="/assets/svgs/telephone.svg" alt="icon"
+                                width="24" height="24" style="filter: invert(37%) sepia(86%) saturate(1915%) hue-rotate(331deg) brightness(89%) contrast(92%);">
                         </picture>
                         <div class="cs-info">
                             <span class="cs-link-content">Need Help?</span>
@@ -180,7 +306,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
                 <p class="cs-text">
                     We craft outstanding digital solutions. With more than 7 years of expertise, we design and build refined websites specifically for the construction sector.
                 </p>
-                <a class="cs-button-solid" href="">More About Us</a>
+                <a class="cs-button-solid" href="/about">More About Us</a>
             </div>
         </div>
     </div>
@@ -197,7 +323,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
         <div class="cs-content">
             <div class="cs-flex-group">
                 <span class="cs-topper">Our Services</span>
-                <h2 class="cs-title">Our Popular Services</h2>
+                <h2 class="cs-title">Our Dedicated Services</h2>
             </div>
             <p class="cs-text">
                 At SandL Roofing, we provide complete roofing and exterior solutions designed to protect, enhance, and strengthen properties of every size. From residential homes to large-scale commercial facilities, our services are built with quality, reliability, and long-term performance in mind.
@@ -315,7 +441,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             <li class="cs-item">
                 <h3 class="cs-h3">
                     <picture class="cs-wrapper">
-                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/chat-gold.svg" alt="icon" width="24" height="24">
+                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="/assets/svgs/list.svg" alt="icon" width="24" height="24">
                     </picture>
                     Thorough Inspections
                 </h3>
@@ -326,7 +452,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             <li class="cs-item">
                 <h3 class="cs-h3">
                     <picture class="cs-wrapper">
-                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/call-gold.svg" alt="icon" width="24" height="24">
+                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="/assets/svgs/bro.svg" alt="icon" width="24" height="24">
                     </picture>
                     Clear Communication
                 </h3>
@@ -337,7 +463,7 @@ tags: "sitemap" # content/content.json will make sure that all pages in content/
             <li class="cs-item">
                 <h3 class="cs-h3">
                     <picture class="cs-wrapper">
-                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Icons/money-gold.svg" alt="icon" width="24" height="24">
+                        <img class="cs-h3-icon" aria-hidden="true" loading="lazy" decoding="async" src="/assets/svgs/protection.svg" alt="icon" width="24" height="24">
                     </picture>
                     Proven Results
                 </h3>
