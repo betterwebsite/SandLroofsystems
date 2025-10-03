@@ -1,0 +1,208 @@
+---
+title: "Commercial | Code Stitch Web Designs"
+description: "Meta description for the page"
+permalink: "/Commercial/"
+---
+
+{% extends "layouts/base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/assets/css/projects.css">
+{% endblock %}
+
+{% block body %}
+
+   <!-- ============================================ -->
+    <!--                   Banner                     -->
+    <!-- ============================================ -->
+
+    <div id="banner-310">
+        <div class="cs-container">
+            <span class="cs-int-title">Commercial</span>
+            <div class="cs-breadcrumbs">
+                <a href="/" class="cs-link">Home</a>
+                <a href="/Commercial/" class="cs-link cs-active">Commercial</a>
+            </div>
+        </div>
+        <!--Background Image-->
+
+        <picture class="cs-background">
+            <!--Mobile Image-->
+            <source media="(max-width: 600px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 640, height: 600 }) | avif %}" type="image/avif">
+            <source media="(max-width: 600px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 640, height: 600 }) | webp %}" type="image/webp">
+            <source media="(max-width: 600px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 640, height: 600 }) | jpeg %}" type="image/jpeg">
+            <!--Tablet Image-->
+            <source media="(max-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2048, height: 942 }) | avif %}" type="image/avif">
+            <source media="(max-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2048, height: 942 }) | webp %}" type="image/webp">
+            <source media="(max-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2048, height: 942 }) | jpeg %}" type="image/jpeg">
+            <!--Desktop Image-->
+            <source media="(min-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2500, height: 628 }) | avif %}" type="image/avif">
+            <source media="(min-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2500, height: 628 }) | webp %}" type="image/webp">
+            <source media="(min-width: 1024px)" srcset="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2500, height: 628 }) | jpeg %}" type="image/jpeg">
+            <img src="{% getUrl "/assets/images/residential/commericalroof.jpg" | resize({ width: 2500, height: 628 }) | jpeg %}" alt="library" width="1920" height="482" loading="eager" decoding="async">
+        </picture>
+    </div>
+
+<!-- ============================================ -->
+<!--                Side By Side                  -->
+<!-- ============================================ -->
+
+<section id="sbs-2291">
+    <div class="cs-container">
+        <!-- Left Content Section-->
+        <div class="cs-content">
+            <span class="cs-topper">Featured service</span>
+            <h2 class="cs-title">Commercial Roofing Done With Pride and Precision</h2>
+            <p class="cs-text">
+                Your business deserves a roof that’s built to perform. At SandL Roof Systems, we provide high-quality commercial roofing designed to protect your property, lower maintenance costs, and give you peace of mind. Whether you need repairs, a full replacement, or preventative maintenance, our solutions are reliable, durable, and tailored to your building’s needs.
+            </p>
+            
+            <div class="cs-features">
+                <h3 class="cs-h3">Our commercial roofing services include:</h3>
+                <ul class="cs-ul">
+                    <li class="cs-li">Comprehensive roof inspections and condition assessments</li>
+                    <li class="cs-li">Leak detection, repairs, and waterproofing solutions</li>
+                    <li class="cs-li">Complete commercial roof replacements</li>
+                    <li class="cs-li">Flat, metal, TPO, and other commercial roofing systems</li>
+                    <li class="cs-li">Preventative maintenance programs and storm damage restoration</li>
+                </ul>
+            </div>
+            <a class="cs-button-solid" aria-label="learn more about our programs" href="">Call Now</a>
+        </div>
+        <!-- Right Image Section -->
+        <div class="cs-image-group">
+            <!--Floating Box-->
+            <div class="cs-box">
+                <span class="cs-number">100+</span>
+                <div class="cs-flex">
+                    <h3 class="cs-heading">Roofs Installed</h3>
+                    <span class="cs-desc">Fixing roofs with solutions that are as reliable as they are attractive.</span>
+                </div>
+            </div>
+            <!--Image-->
+            <picture class="cs-picture">
+                <source media="(max-width: 600px)" srcset="/assets/images/commercialroof.jpg">
+                <source media="(min-width: 601px)" srcset="/assets/images/commercialroof.jpg">
+                <img loading="lazy" decoding="async" src="/assets/images/commercialroof.jpg" alt="meeting" width="630" height="630" aria-hidden="true">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!--                   Stats                      -->
+<!-- ============================================ -->
+
+<!-- No headers, so no section tag -->
+<div id="stats-340">
+    <ul class="cs-card-group">
+        <li class="cs-item">
+            <picture class="cs-picture">
+                <img class="cs-icon" src="https://csimg.nyc3.digitaloceanspaces.com/Stats/person2-gold.svg" alt="icon" width="35" height="40" loading="lazy" decoding="async" aria-hidden="true">
+            </picture>
+            <div class="cs-flex-group">
+                <span class="cs-number">5840</span>
+                <span class="cs-desc">Cleaning Staff</span>
+            </div>
+        </li>
+        <li class="cs-item">
+            <picture class="cs-picture">
+                <img class="cs-icon" src="https://csimg.nyc3.digitaloceanspaces.com/Stats/mop-gold.svg" alt="icon" width="40" height="35" loading="lazy" decoding="async" aria-hidden="true">
+            </picture>
+            <div class="cs-flex-group">
+                <span class="cs-number">3140</span>
+                <span class="cs-desc">Projects Completed</span>
+            </div>
+        </li>
+        <li class="cs-item">
+            <picture class="cs-picture">
+                <img class="cs-icon" src="https://csimg.nyc3.digitaloceanspaces.com/Stats/thumbs-gold.svg" alt="icon" width="40" height="40" loading="lazy" decoding="async" aria-hidden="true">
+            </picture>
+            <div class="cs-flex-group">
+                <span class="cs-number">2260</span>
+                <span class="cs-desc">Satisfied Clients</span>
+            </div>
+        </li>
+        <li class="cs-item">
+            <picture class="cs-picture">
+                <img class="cs-icon" src="https://csimg.nyc3.digitaloceanspaces.com/Stats/award2-gold.svg" alt="icon" width="40" height="40" loading="lazy" decoding="async" aria-hidden="true">
+            </picture>
+            <div class="cs-flex-group">
+                <span class="cs-number">2365</span>
+                <span class="cs-desc">Awards Won</span>
+            </div>
+        </li>
+    </ul>
+    <!--Background Image-->
+    <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/assets/images/residential/commericalroof.jpg">
+        <source media="(min-width: 601px)" srcset="/assets/images/residential/commericalroof.jpg">
+        <img aria-hidden="true" loading="lazy" decoding="async" src="/assets/images/residential/commericalroof.jpg" alt="cleaning products" width="1920" height="283">
+    </picture>
+</div>
+
+
+<!-- ============================================ -->
+<!--                    Steps                     -->
+<!-- ============================================ -->
+
+<section id="steps-2330">
+    <div class="cs-container">
+        <div class="cs-wrapper">
+            <div class="cs-content">
+                <span class="cs-topper">Process</span>
+                <h2 class="cs-title">A custom process just for you!</h2>
+            </div>
+            <!--Preferrably use an image that is a horizontal image-->
+            <picture class="cs-picture">
+                <!--Mobile Image-->
+                <source media="(max-width: 600px)" srcset="/assets/images/residential/comroof2.jpg">
+                <!--Tablet and above Image-->
+                <source media="(min-width: 601px)" srcset="/assets/images/residential/comroof2.jpg">
+                <img loading="lazy" decoding="async" src="/assets/images/residential/comroof2.jpg" alt="truck" width="748" height="420">
+            </picture>
+        </div>
+        <ul class="cs-card-group">
+            <li class="cs-item">
+                <span class="cs-number">01</span>
+                <div class="cs-flex">
+                    <h3 class="cs-h3">Inspection & Evaluation</h3>
+                    <p class="cs-item-text">
+                        We begin with a detailed inspection of your commercial roof, identifying issues, assessing overall condition, and outlining the best solutions.
+                    </p>
+                </div>
+            </li>
+            <li class="cs-item">
+                <span class="cs-number">02</span>
+                <div class="cs-flex">
+                    <h3 class="cs-h3">Customized Plan & Estimate</h3>
+                    <p class="cs-item-text">
+                        You’ll receive a clear proposal with options, costs, and timelines, tailored to your building’s specific needs and budget.
+                </div>
+            </li>
+            <li class="cs-item">
+                <span class="cs-number">03</span>
+                <div class="cs-flex">
+                    <h3 class="cs-h3">Professional Installation or Repair</h3>
+                    <p class="cs-item-text">
+                        Our experienced team handles the work with minimal disruption to your business, using quality materials and proven techniques for long-lasting results.
+                    </p>
+                </div>
+            </li>
+            <li class="cs-item">
+                <span class="cs-number">04</span>
+                <div class="cs-flex">
+                    <h3 class="cs-h3">Final Review & Ongoing Support</h3>
+                    <p class="cs-item-text">
+                        Once the job is complete, we conduct a walkthrough to ensure everything meets expectations and offer ongoing maintenance options to protect your investment.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <span class="cs-floater">Process</span>
+</section>
+
+    {% include 'sections/cta.html' %}
+
+{% endblock %}
